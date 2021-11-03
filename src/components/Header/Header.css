@@ -1,0 +1,39 @@
+.header {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  min-height: 74px;
+  padding: 0 70px;
+}
+
+.header-page__main {
+  background-color: #DDDEE3;
+}
+
+.header-page__auth {
+  max-width: 396px;
+  margin: 0 auto;
+  padding: 70px 0 40px;
+}
+
+@media (max-width: 770px) {
+  .header {
+    padding: 0 30px;
+  }
+
+  .header-page__auth {
+    padding-top: 232px;
+  }
+}
+
+@media (max-width: 450px) {
+  .header {
+    padding: 0 14px;
+  }
+
+  .header-page__auth {
+    justify-content: center;
+    padding-top: 56px;
+		padding-bottom: 50px;
+  }
+}
