@@ -1,9 +1,13 @@
 .header {
   display: flex;
   align-items: center;
-  background-color: #fff;
+  background-color: #FAFAFA;
   min-height: 74px;
   padding: 0 70px;
+}
+
+.header_hidden {
+  display: none;
 }
 
 .header-page__main {
@@ -11,9 +15,10 @@
 }
 
 .header-page__auth {
-  max-width: 396px;
+  width: 396px;
   margin: 0 auto;
   padding: 70px 0 40px;
+  box-sizing: border-box;
 }
 
 @media (max-width: 770px) {
@@ -22,7 +27,7 @@
   }
 
   .header-page__auth {
-    padding-top: 232px;
+    padding: 232px 0 40px;
   }
 }
 
@@ -32,6 +37,7 @@
   }
 
   .header-page__auth {
+    width: 260px;
     justify-content: center;
     padding-top: 56px;
 		padding-bottom: 50px;

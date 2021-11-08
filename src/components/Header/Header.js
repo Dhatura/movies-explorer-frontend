@@ -9,11 +9,15 @@ import Navigation from '../Navigation/Navigation';
 function Header() {
   const [headerStyle, setHeaderStyle] = React.useState('');
   const { pathname } = useLocation();
-  const authList = ['/signup', '/signin'];
 
   React.useEffect( () => {
-    if (pathname === '/') setHeaderStyle('header-page__main')
-    if (authList.some((item) => item === pathname)) setHeaderStyle('header-page__auth')
+    const permittedList = ['/movies', '/saved-movies', '/profile'];
+    const authList = ['/signup', '/signin'];
+
+    if (pathname === '/') setHeaderStyle('header-page__main');
+    else if (permittedList.some((item) => item === pathname)) setHeaderStyle('');
+    else if (authList.some((item) => item === pathname)) setHeaderStyle('header-page__auth');
+    else setHeaderStyle('header_hidden');
   }, [pathname])
 
   return (
