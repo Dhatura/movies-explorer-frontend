@@ -4,7 +4,7 @@ import {Link, NavLink, useLocation} from "react-router-dom";
 import './Navigation.css';
 import AccountIcon from '../../images/account_icon.svg';
 
-function Navigation() {
+function Navigation({ loggedIn }) {
   const [activeBurgerMenu, setActiveBurgerMenu] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -16,11 +16,11 @@ function Navigation() {
   };
 
   const { pathname } = useLocation();
-  const permittedList = ['/movies', '/saved-movies', '/profile'];
+  const permittedList = ['/movies', '/saved-movies', '/profile', '/'];
 
   return (
     <>
-      {pathname === '/' && (
+      {pathname === '/' && !loggedIn && (
         <nav className="navigation">
           <Link to="/signup" className="navigation__link navigation__link_type_signup">
             Регистрация
@@ -30,7 +30,7 @@ function Navigation() {
           </Link>
         </nav>
       )}
-      {permittedList.some( (item) => item === pathname) && (
+      {permittedList.some( (item) => item === pathname) && loggedIn && (
         <>
           <nav className="navigation navigation_hidden">
           <Link to="/movies" className="navigation__link navigation__link_type_movies">

@@ -6,7 +6,7 @@ import './Header.css';
 import LogoHeader from '../LogoHeader/LogoHeader';
 import Navigation from '../Navigation/Navigation';
 
-function Header() {
+function Header({ loggedIn }) {
   const [headerStyle, setHeaderStyle] = React.useState('');
   const { pathname } = useLocation();
 
@@ -23,7 +23,9 @@ function Header() {
   return (
     <header className={`header ${headerStyle}`}>
       <LogoHeader />
-      <Navigation />
+      <Navigation
+      loggedIn={loggedIn}
+      />
     </header>
   );
 }
