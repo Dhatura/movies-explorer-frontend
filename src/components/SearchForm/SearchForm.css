@@ -1,4 +1,5 @@
 .search-form__container {
+  position: relative;
   display: flex;
   justify-content: space-between;
   border: 1.5px solid rgba(170, 170, 170, 0.2);
@@ -21,6 +22,16 @@
 .search-form__input:focus {
   outline: 0;
   border-bottom: 1px solid #3456F3;
+}
+
+.search-form__error {
+  position: absolute;
+  top: 72px;
+  left: 0;
+  color: #EE3465;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
 }
 
 .search-form__btn {
