@@ -10,8 +10,8 @@ function Movies({
   movies,
   toggleCheckbox,
   checkboxOn,
-  onSaveMoviesCard,
-  onDeleteMoviesCard,
+  handleSaveMovie,
+  handleDeleteMovie,
   savedMovies,
   isMoviesNotFound,
   isErrorServer,
@@ -19,7 +19,6 @@ function Movies({
   isLoading
 })
   {
-  const likedMovies = savedMovies.map((movieItem) => movieItem.movieId);
   return (
     <section className="movies">
       <SearchForm
@@ -33,9 +32,8 @@ function Movies({
         <MoviesCardList
           movies={movies}
           pageSavedMovies={false}
-          onSaveMoviesCard={onSaveMoviesCard}
-          onDeleteMoviesCard={onDeleteMoviesCard}
-          isMoviesLiked={likedMovies}
+          handleSaveMovie={handleSaveMovie}
+          handleDeleteMovie={handleDeleteMovie}
           savedMovies={savedMovies}
           isMoviesNotFound={isMoviesNotFound}
           isErrorServer={isErrorServer}

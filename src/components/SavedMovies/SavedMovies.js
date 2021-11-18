@@ -11,8 +11,9 @@ function SavedMovies({
   handleSearchSubmit,
   toggleCheckbox,
   checkboxOn,
-  onDeleteMoviesCard,
+  handleDeleteMovie,
   savedMovies,
+  isMoviesNotFound,
   isLoading,
   }) {
   return (
@@ -28,8 +29,9 @@ function SavedMovies({
         <MoviesCardList
           movies={movies}
           pageSavedMovies={true}
-          onDeleteMoviesCard={onDeleteMoviesCard}
+          handleDeleteMovie={handleDeleteMovie}
           savedMovies={savedMovies}
+          isMoviesNotFound={isMoviesNotFound}
         />
       )}
     </section>

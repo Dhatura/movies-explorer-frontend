@@ -46,7 +46,7 @@ function Profile({ handleSignOut, onEditUserInfo, isComplitedUpdate, setComplite
           <input className="profile__input" type="email" id="email" name="email" placeholder="email" minLength="2" maxLength="30" autoComplete="off" required value={values.email || ''} onChange={handleChange} />
         </label>
         {isComplitedUpdate ? (
-          <span className="profile_submit-error">
+          <span className="profile_submit-sucsess">
             Обновление профиля прошло успешно!
           </span>
         ) : null}

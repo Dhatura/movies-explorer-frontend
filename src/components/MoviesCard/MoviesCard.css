@@ -49,6 +49,7 @@
   width: 14px;
   height: 14px;
   cursor: pointer;
+  transition: all 0.3s ease-out;
 }
 
 .card__like-icon_active {
@@ -60,6 +61,10 @@
   width: 14px;
   height: 14px;
   cursor: pointer;
+}
+
+.card__like-icon:hover {
+  transform: scale(1.5);
 }
 
 .card__delete-icon {

@@ -36,15 +36,17 @@ function App() {
 
   const [isLoading, setLoading] = useState(false);
   const [isMoviesNotFound, setMoviesNotFound] = useState(false);
+  const [isSavedMoviesNotFound, setIsSavedMoviesNotFound] = useState(false);
   const [isErrorServer, setErrorServer] = useState(false);
 
-  // отфильтрованные фильмы текущего поиска
-  const [movies, setMovies] = useState([]);
-  // все фильмы с внешнего сервера
-  const [allMovies, setAllMovies] = useState([]);
-  //
-  const [allSavedMovies, setAllSavedMovies] = useState([]);
-  const [savedMovies, setSavedMovies] = useState([]);
+    // все фильмы с внешнего сервера
+    const [allMovies, setAllMovies] = useState([]);
+    // отфильтрованные фильмы текущего поиска
+    const [movies, setMovies] = useState([]);
+    // все сохраненные фильмы
+    const [allSavedMovies, setAllSavedMovies] = useState([]);
+    // отфильтрованные сохраненные фильмы
+    const [savedMovies, setSavedMovies] = useState([]);
 
   const history = useHistory();
   const { pathname } = useLocation();
@@ -72,7 +74,7 @@ function App() {
           setSavedMovies(userMovies)
         })
         .catch((err) => {
-          console.log(err);
+          console.log(`Ошибка: ${err}`);
         });
     }
   }, [loggedIn]);
@@ -131,6 +133,17 @@ function App() {
       });
   }
 
+  const handleSignOut = () => {
+    localStorage.removeItem('token');
+    setLoggedIn(false);
+    setAllMovies([]);
+    setMovies([]);
+    setAllSavedMovies([]);
+    setSavedMovies([]);
+    setCurrentUser({ email: '', name: '' });
+    history.push('/');
+  }
+
   const handleToggleCheckbox = () => {
     setIsCheckboxOn(!isCheckboxOn);
   }
@@ -171,83 +184,63 @@ function App() {
       .then((res) => {
         setMovies(res)
       })
-      .catch(() => {
+      .catch((err) => {
         setMovies([]);
         setErrorServer(true);
+        console.log(`Ошибка: ${err}`);
       })
       .finally(() => {
         setLoading(false);
       })
     }
-
   }
 
   const handleSaveSearchMovies = (keySavedWord) => {
-    setSavedMovies(handleFilteredMovies(allSavedMovies, keySavedWord, isSavedCheckboxOn))
-
+    setLoading(true);
+    setIsSavedMoviesNotFound(false);
+    const newSavedMovies = handleFilteredMovies(allSavedMovies, keySavedWord, isSavedCheckboxOn);
+    setSavedMovies(newSavedMovies);
+    if (newSavedMovies.length === 0)
+      setIsSavedMoviesNotFound(true);
+    setLoading(false);
   }
 
-  const handleSaveMovies = (movieItem) => {
-    return mainApi.saveMovie(movieItem)
-    .then((savedMovieItem) => {
-      localStorage.setItem(
-        'savedMovies', JSON.stringify([savedMovieItem, ...savedMovies]),
-      );
-      setSavedMovies([savedMovieItem, ...savedMovies]);
-    })
-    .then((res) => (res))
-    .catch((err) => {
-      console.log(`Ошибка: ${err}`);
-    });
+  const handleSaveMovie = (movieForSave) => {
+    movieForSave = {
+      country: movieForSave.country || 'Страна не указана',
+      director: movieForSave.director || 'Режиссер не указан',
+      duration: movieForSave.duration || 0,
+      year: movieForSave.year || 'Год не указан',
+      description: movieForSave.description || 'Описание отсутствует',
+      image: `https://api.nomoreparties.co${movieForSave.image.url}`,
+      trailer: movieForSave.trailerLink || 'https://youtube.ru',
+      thumbnail: `https://api.nomoreparties.co${movieForSave.image.url}`,
+      movieId: movieForSave.id,
+      nameRU: movieForSave.nameRU || 'Нет названия',
+      nameEN: movieForSave.nameEN || 'Title not found',
+    };
+    return mainApi.saveMovie(movieForSave)
+      .then((savedMovieItem) => {
+        const newSavedMovies = [...allSavedMovies, savedMovieItem];
+        setAllSavedMovies(newSavedMovies);
+        setSavedMovies(newSavedMovies);
+      })
+      .catch((err) => {
+        console.log(`Ошибка: ${err}`);
+      })
   }
 
-  useEffect(() => {
-    localStorage.setItem('movies', JSON.stringify(savedMovies));
-  }, [savedMovies]);
-
-  // useEffect(() => {
-  //   setIsMoviesNotFound(false);
-  // }, [loggedIn]);
-
-  // useEffect(() => {
-  //   if (localStorage.getItem('foundMovies')) {
-  //     handleSearchFilteredMovies();
-  //   }
-  // }, [isShortFilmFiltered]);
-
-  // useEffect(() => {
-  //   if (savedKeyWord) {
-  //     handleSearchSavedMovies(savedKeyWord);
-  //   }
-  // }, [savedKeyWord, savedMovies]);
-
-  // useEffect(() => {
-  //   if (savedMovies.length || foundSavedMovies.length) {
-  //     handleSearchSavedMovies(savedKeyWord);
-  //   }
-  // }, [foundSavedMovies.length, isShortSavedFilmFiltered, savedKeyWord, savedMovies.length]);
-
-  // const handleSaveMoviesCard = (movie) => {
-  //   mainApi
-  //     .saveMovie(movie)
-  //     .then((item) => {
-  //       setSavedMoviesId([...savedMoviesId, movie.movieId]);
-  //       setSavedMovies([...savedMovies, item]);
-  //     })
-  //     .catch((err) => {
-  //       console.log(`Ошибка: ${err}`);
-  //     });
-  // };
-
-
-  function handleSignOut() {
-    localStorage.removeItem('token');
-    // localStorage.removeItem('foundMovies');
-    // localStorage.removeItem('movies');
-    setLoggedIn(false);
-    // setMovies([]);
-    setCurrentUser({ email: '', name: '' });
-    history.push('/signin');
+  const handleDeleteMovie = (movieForDelete, isSavedPage) => {
+    const movieForDeleteId = isSavedPage ? movieForDelete._id : savedMovies.find((item) => movieForDelete.id === item.movieId)._id;
+    return mainApi.deleteMovie(movieForDeleteId)
+      .then((res)=>{
+        const newSavedMovies = allSavedMovies.filter((item) => item._id !== movieForDeleteId);
+        setAllSavedMovies(newSavedMovies);
+        setSavedMovies(newSavedMovies);
+      })
+      .catch((err) => {
+        console.log(`Ошибка: ${err}`);
+      })
   }
 
   return (
@@ -306,8 +299,8 @@ function App() {
               toggleCheckbox={handleToggleCheckbox}
               checkboxOn={isCheckboxOn}
               handleSearchSubmit={handleSearchMovies}
-              onSaveMoviesCard={handleSaveMovies}
-              // onDeleteMoviesCard={}
+              handleSaveMovie={handleSaveMovie}
+              handleDeleteMovie={handleDeleteMovie}
               savedMovies={savedMovies}
               isMoviesNotFound={isMoviesNotFound}
               isErrorServer={isErrorServer}
@@ -322,9 +315,10 @@ function App() {
               toggleCheckbox={handleSavedToggleCheckbox}
               checkboxOn={isSavedCheckboxOn}
               handleSearchSubmit={handleSaveSearchMovies}
-              // onDeleteMoviesCard={}
+              handleDeleteMovie={handleDeleteMovie}
               savedMovies={savedMovies}
-              // isLoading={}
+              isMoviesNotFound={isSavedMoviesNotFound}
+              isLoading={isLoading}
             />
             <Route path='/*'>
               <PageNotFound />

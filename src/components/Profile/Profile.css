@@ -69,6 +69,13 @@
   line-height: 17px;
 }
 
+.profile_submit-sucsess {
+  color: #1daa51;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+}
+
 .profile__btn {
   align-self: center;
   font-weight: 400;
