@@ -15,8 +15,8 @@ class MainApi {
     return fetch(`${this._baseUrl}/users/me`, {
       method: "GET",
       headers: {
-        "Authorization": `Bearer ${localStorage.getItem('token')}`,
-      }
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
     }).then((res) => {
       return this._getResponseData(res);
     });
@@ -26,7 +26,7 @@ class MainApi {
     return fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
       headers: {
-        "Authorization": `Bearer ${localStorage.getItem('token')}`,
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
@@ -42,8 +42,8 @@ class MainApi {
     return fetch(`${this._baseUrl}/movies`, {
       method: "GET",
       headers: {
-        "Authorization": `Bearer ${localStorage.getItem('token')}`,
-      }
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
     }).then((res) => {
       return this._getResponseData(res);
     });
@@ -53,7 +53,7 @@ class MainApi {
     return fetch(`${this._baseUrl}/movies`, {
       method: "POST",
       headers: {
-        "Authorization": `Bearer ${localStorage.getItem('token')}`,
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
@@ -69,7 +69,7 @@ class MainApi {
         nameRU: movie.nameRU,
         nameEN: movie.nameEN,
       }),
-  }).then((res) => {
+    }).then((res) => {
       return this._getResponseData(res);
     });
   }
@@ -78,20 +78,19 @@ class MainApi {
     return fetch(`${this._baseUrl}/movies/${movieId}`, {
       method: "DELETE",
       headers: {
-        "Authorization": `Bearer ${localStorage.getItem('token')}`,
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     }).then((res) => {
       return this._getResponseData(res);
     });
   }
-
-};
+}
 
 const mainApi = new MainApi({
   baseUrl: BASE_URL,
   headers: {
-    "Content-Type": "application/json"
-  }
+    "Content-Type": "application/json",
+  },
 });
 
 export default mainApi;

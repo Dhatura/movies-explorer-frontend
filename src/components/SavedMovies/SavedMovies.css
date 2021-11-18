@@ -6,13 +6,13 @@
 @media (max-width: 900px) {
   .saved-movies {
     padding-left: 30px;
-		padding-right: 30px;
+    padding-right: 30px;
   }
 }
 
 @media (max-width: 450px) {
   .saved-movies {
     padding-left: 10px;
-		padding-right: 10px;
+    padding-right: 10px;
   }
 }

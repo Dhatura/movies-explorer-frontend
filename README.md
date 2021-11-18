@@ -2,4 +2,6 @@
 
 ### :link: Макет проекта: [https://www.figma.com/file/4YYFpPc63hPoCgF1YFntJ8/Diploma!?node-id=891%3A3857](https://www.figma.com/file/4YYFpPc63hPoCgF1YFntJ8/Diploma!?node-id=891%3A3857)
 
-### :link: Здесь скоро будет полноценный сайт: [datura-movies.nomoredomains.monster](datura-movies.nomoredomains.monster)
+### :link: Проект можно посмотреть по ссылке: [https://datura-movies.nomoredomains.monster](https://datura-movies.nomoredomains.monster)
+
+### :link: Сервер проекта: [https://api.datura-movies.nomoredomains.monster](https://api.datura-movies.nomoredomains.monster)

@@ -1,9 +1,9 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 
-import './LogoHeader.css';
+import "./LogoHeader.css";
 
-import Logo from '../../images/logo_icon.svg';
+import Logo from "../../images/logo_icon.svg";
 
 function LogoHeader() {
   return (

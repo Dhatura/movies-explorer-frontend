@@ -2,7 +2,7 @@
   display: flex;
   justify-content: center;
   max-width: 480px;
-  color: #EE3465;
+  color: #ee3465;
   margin: 40px auto 0;
   font-style: normal;
   font-weight: normal;
@@ -18,28 +18,28 @@
 .movies-cards__list {
   display: grid;
   grid-template-columns: repeat(auto-fill, 364px);
-	column-gap: 24px;
+  column-gap: 24px;
   row-gap: 37px;
   justify-content: center;
   box-sizing: border-box;
-	padding: 70px 0 10px;
-	margin: 0;
-	list-style: none;
+  padding: 70px 0 10px;
+  margin: 0;
+  list-style: none;
 }
 
 .movies-cards__button {
   width: 320px;
-	height: 36px;
+  height: 36px;
   font-weight: 500;
-	font-size: 12px;
-	line-height: 15px;
-	background-color:#F4F4F4;
-	display: block;
-	border: none;
-	border-radius: 6px;
-	box-sizing: border-box;
+  font-size: 12px;
+  line-height: 15px;
+  background-color: #f4f4f4;
+  display: block;
+  border: none;
+  border-radius: 6px;
+  box-sizing: border-box;
   margin: 50px auto 0;
-	cursor: pointer;
+  cursor: pointer;
   transition: all 0.3s ease-out;
 }
 

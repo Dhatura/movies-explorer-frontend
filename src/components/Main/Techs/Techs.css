@@ -1,6 +1,6 @@
 .techs {
   padding: 100px 70px;
-  background-color: #F5F5F5;
+  background-color: #f5f5f5;
 }
 
 .techs__title {
@@ -45,7 +45,7 @@
 }
 
 .techs__list-item {
-  background: #E8E8E8;
+  background: #e8e8e8;
   border-radius: 10px;
   text-align: center;
   padding: 21px 0;
@@ -92,7 +92,7 @@
 @media (max-width: 550px) {
   .techs {
     padding: 70px 18px;
-    background-color: #FAFAFA;
+    background-color: #fafafa;
   }
 
   .techs__title {

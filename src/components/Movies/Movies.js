@@ -1,10 +1,10 @@
-import React from 'react';
+import React from "react";
 
-import './Movies.css'
+import "./Movies.css";
 
-import SearchForm from '../SearchForm/SearchForm';
-import MoviesCardList from '../MoviesCardList/MoviesCardList';
-import Preloader from '../Preloader/Preloader';
+import SearchForm from "../SearchForm/SearchForm";
+import MoviesCardList from "../MoviesCardList/MoviesCardList";
+import Preloader from "../Preloader/Preloader";
 
 function Movies({
   movies,
@@ -16,9 +16,8 @@ function Movies({
   isMoviesNotFound,
   isErrorServer,
   handleSearchSubmit,
-  isLoading
-})
-  {
+  isLoading,
+}) {
   return (
     <section className="movies">
       <SearchForm

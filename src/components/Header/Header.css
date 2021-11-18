@@ -1,7 +1,7 @@
 .header {
   display: flex;
   align-items: center;
-  background-color: #FAFAFA;
+  background-color: #fafafa;
   min-height: 74px;
   padding: 0 70px;
 }
@@ -11,7 +11,7 @@
 }
 
 .header-page__main {
-  background-color: #DDDEE3;
+  background-color: #dddee3;
 }
 
 .header-page__auth {
@@ -40,6 +40,6 @@
     width: 260px;
     justify-content: center;
     padding-top: 56px;
-		padding-bottom: 50px;
+    padding-bottom: 50px;
   }
 }

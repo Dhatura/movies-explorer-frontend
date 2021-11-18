@@ -1,10 +1,10 @@
-import React from 'react';
+import React from "react";
 
-import './SavedMovies.css';
+import "./SavedMovies.css";
 
-import SearchForm from '../SearchForm/SearchForm';
-import MoviesCardList from '../MoviesCardList/MoviesCardList';
-import Preloader from '../Preloader/Preloader';
+import SearchForm from "../SearchForm/SearchForm";
+import MoviesCardList from "../MoviesCardList/MoviesCardList";
+import Preloader from "../Preloader/Preloader";
 
 function SavedMovies({
   movies,
@@ -15,7 +15,7 @@ function SavedMovies({
   savedMovies,
   isMoviesNotFound,
   isLoading,
-  }) {
+}) {
   return (
     <section className="saved-movies">
       <SearchForm
