@@ -3,21 +3,22 @@ import React, { useState } from "react";
 import "./SearchForm.css";
 
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
-import useValidForm from "../../hooks/useValidForm";
 
 function SearchForm({ handleSearchSubmit, toggleCheckbox, checkboxOn }) {
-  const { values, handleChange, errors, isValid } = useValidForm();
+  const [inputValue, setInputValue] = useState("");
   const [searchFormError, setSearchFormError] = useState("");
+
+  const handleChange = (evt) => {
+    setSearchFormError("");
+    setInputValue(evt.target.value);
+  };
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    if (isValid) {
-      setSearchFormError("");
-      handleSearchSubmit(values.keyword);
-    } else if (values.keyword.length > 0) {
-      setSearchFormError(errors.keyword);
-    } else {
+    if (!inputValue) {
       setSearchFormError("Нужно ввести ключевое слово");
+    } else {
+      handleSearchSubmit(inputValue);
     }
   };
 
@@ -29,9 +30,8 @@ function SearchForm({ handleSearchSubmit, toggleCheckbox, checkboxOn }) {
             className="search-form__input"
             type="text"
             name="keyword"
-            value={values.keyword || ""}
+            value={inputValue || ""}
             placeholder="Фильм"
-            required
             onChange={handleChange}
           />
           <span className="search-form__error">{searchFormError}</span>

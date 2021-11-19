@@ -95,7 +95,7 @@ function MoviesCardList({
       {!pageSavedMovies ? (
         <button
           className={`${
-            movies.length > moviesQuantity(window.innerWidth).quantity
+            movies.length > moviesCount
               ? "movies-cards__button"
               : "movies-cards__button_hidden"
           }`}

@@ -81,6 +81,9 @@ function App() {
           setCurrentUser(userData);
           setAllSavedMovies(userMovies);
           setSavedMovies(userMovies);
+
+          if ("movies" in localStorage)
+            setMovies(JSON.parse(localStorage.getItem("movies")));
         })
         .catch((err) => {
           console.log(`Ошибка: ${err}`);
@@ -144,6 +147,7 @@ function App() {
 
   const handleSignOut = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("movies");
     setLoggedIn(false);
     setAllMovies([]);
     setMovies([]);
@@ -200,6 +204,11 @@ function App() {
           return filtredMovies;
         })
         .then((res) => {
+          localStorage.setItem("movies", JSON.stringify(res));
+          // setMovies(JSON.parse(localStorage.getItem('movies')));
+          // localStorage.setItem('movies', JSON.stringify(res));
+          // localStorage.setItem('keyWord', JSON.stringify(keyWord));
+          // localStorage.setItem('checkbox', JSON.stringify(isCheckboxOn))
           setMovies(res);
         })
         .catch((err) => {
