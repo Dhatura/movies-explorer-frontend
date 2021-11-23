@@ -1,7 +1,7 @@
 .navigation {
   display: flex;
-	align-items: baseline;
-	width: 100%;
+  align-items: baseline;
+  width: 100%;
 }
 
 .navigation__link {
@@ -12,7 +12,6 @@
   font-size: 12px;
   line-height: 16px;
   transition: opacity 0.3s ease-out;
-
 }
 
 .navigation__link_type_signup {
@@ -25,11 +24,10 @@
 }
 
 .navigation__link_type_signin {
-  color: #FFF;
+  color: #fff;
   padding: 8px 20px;
   border-radius: 3px;
-  background-color: #3456F3;
-
+  background-color: #3456f3;
 }
 
 .navigation__link_type_signin:hover {
@@ -86,10 +84,10 @@
   display: none;
   background: url("../../images/menu-burger.svg") center center no-repeat;
   width: 44px;
-	height: 44px;
+  height: 44px;
   border: none;
   margin-left: auto;
-	cursor: pointer;
+  cursor: pointer;
 }
 
 .burger-menu {
@@ -179,29 +177,29 @@
 .burger-menu-btn-cls {
   background: url("../../images/close_icon_768-320.svg") center center no-repeat;
   width: 22px;
-	height: 22px;
+  height: 22px;
   border: none;
   position: absolute;
-	right: 22px;
-	top: 22px;
-	cursor: pointer;
+  right: 22px;
+  top: 22px;
+  cursor: pointer;
 }
 
 @media (max-width: 770px) {
-	.navigation_hidden {
-		display: none;
-	}
+  .navigation_hidden {
+    display: none;
+  }
 
   .burger-menu-btn {
-		display: block;
-	}
+    display: block;
+  }
 }
 
 @media (max-width: 450px) {
   .burger-menu-btn {
     width: 40px;
-		height: 43px;
-	}
+    height: 43px;
+  }
 
   .burger-menu__list {
     padding: 144px 10px 46px;

@@ -1,15 +1,43 @@
-import React from 'react';
+import React from "react";
 
-import './Movies.css'
+import "./Movies.css";
 
-import SearchForm from '../SearchForm/SearchForm';
-import MoviesCardList from '../MoviesCardList/MoviesCardList';
+import SearchForm from "../SearchForm/SearchForm";
+import MoviesCardList from "../MoviesCardList/MoviesCardList";
+import Preloader from "../Preloader/Preloader";
 
-function Movies() {
+function Movies({
+  movies,
+  toggleCheckbox,
+  checkboxOn,
+  handleSaveMovie,
+  handleDeleteMovie,
+  savedMovies,
+  isMoviesNotFound,
+  isErrorServer,
+  handleSearchSubmit,
+  isLoading,
+}) {
   return (
     <section className="movies">
-      <SearchForm />
-      <MoviesCardList movies={[...Array(12).keys()]} />
+      <SearchForm
+        handleSearchSubmit={handleSearchSubmit}
+        toggleCheckbox={toggleCheckbox}
+        checkboxOn={checkboxOn}
+      />
+      {isLoading ? (
+        <Preloader />
+      ) : (
+        <MoviesCardList
+          movies={movies}
+          pageSavedMovies={false}
+          handleSaveMovie={handleSaveMovie}
+          handleDeleteMovie={handleDeleteMovie}
+          savedMovies={savedMovies}
+          isMoviesNotFound={isMoviesNotFound}
+          isErrorServer={isErrorServer}
+        />
+      )}
     </section>
   );
 }

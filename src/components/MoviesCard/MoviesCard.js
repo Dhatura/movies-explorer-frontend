@@ -1,31 +1,68 @@
-import React, { useState } from 'react';
-import { useLocation } from "react-router-dom";
+import "./MoviesCard.css";
 
-import './MoviesCard.css';
+function MoviesCard({
+  movie,
+  savedMovies,
+  pageSavedMovies,
+  handleSaveMovie,
+  handleDeleteMovie,
+}) {
+  const hoursDuration = Math.trunc(movie.duration / 60);
+  const minutesDuration = movie.duration % 60;
+  const durationMovie = `${hoursDuration > 0 ? hoursDuration + "ч " : ""}${
+    minutesDuration > 0 ? minutesDuration + "м" : ""
+  }`;
 
-import FilmImg from '../../images/film.png';
+  const isSaved = savedMovies.some((i) => i.movieId === movie.id);
 
-function MoviesCard() {
-  const [saveMovie, setSaveMovie] = useState(false);
-  const { pathname } = useLocation();
+  const onLike = () => {
+    isSaved
+      ? handleDeleteMovie(movie, pageSavedMovies)
+      : handleSaveMovie(movie);
+  };
 
-  const saveButtonHandler = () => {
-    setSaveMovie(!saveMovie);
-  }
+  const onDelete = () => {
+    handleDeleteMovie(movie, pageSavedMovies);
+  };
 
   return (
     <li className="card">
-      <img className="card__img" src={FilmImg} alt="обложка фильма" />
+      <a
+        href={pageSavedMovies ? movie.trailer : movie.trailerLink}
+        target="_blank"
+        rel="noreferrer"
+      >
+        <img
+          className="card__img"
+          src={
+            pageSavedMovies
+              ? movie.image
+              : `https://api.nomoreparties.co${movie.image.url}`
+          }
+          alt="обложка фильма"
+        />
+      </a>
       <div className="card__info">
-        <h3 className="card__title">Бег это свобода</h3>
-        {
-          pathname === "/movies" ?
-          <button className={`card__like-icon ${saveMovie ? "card__like-icon_active" : ''}`} onClick={saveButtonHandler} />
-          :
-          <button className="card__delete-icon" />
-        }
+        <h3 className="card__title">{movie.nameRU}</h3>
+        {pageSavedMovies ? (
+          <button
+            className="card__delete-icon"
+            type="button"
+            aria-label="Удалить"
+            onClick={onDelete}
+          />
+        ) : (
+          <button
+            className={`card__like-icon ${
+              isSaved ? "card__like-icon_active" : ""
+            }`}
+            type="button"
+            aria-label="Лайк"
+            onClick={onLike}
+          />
+        )}
       </div>
-      <p className="card__duration">1ч 44м</p>
+      <p className="card__duration">{durationMovie}</p>
     </li>
   );
 }

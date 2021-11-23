@@ -32,13 +32,13 @@
 
 .not-found__btn {
   font-weight: 400;
-	font-size: 14px;
-	line-height: 17px;
+  font-size: 14px;
+  line-height: 17px;
   border: none;
-	background: transparent;
-	text-decoration: none;
-	color: #3456F3;
-	cursor: pointer;
+  background: transparent;
+  text-decoration: none;
+  color: #3456f3;
+  cursor: pointer;
   transition: opacity 0.3s ease-out;
 }
 
